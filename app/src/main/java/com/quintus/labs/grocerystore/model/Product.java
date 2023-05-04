@@ -11,32 +11,18 @@ public class Product {
     String categoryId;
     String title;
     String description;
-    String attribute;
     String currency;
     String price;
     String discount;
     String image;
 
-    public Product() {
-    }
 
-    public Product(String id, String categoryId, String title, String description, String attribute, String price, String discount, String image) {
+
+    public Product(String id, String categoryId, String title, String description, String currency, String price, String discount, String image) {
         this.id = id;
         this.categoryId = categoryId;
         this.title = title;
         this.description = description;
-        this.attribute = attribute;
-        this.price = price;
-        this.discount = discount;
-        this.image = image;
-    }
-
-    public Product(String id, String categoryId, String title, String description, String attribute, String currency, String price, String discount, String image) {
-        this.id = id;
-        this.categoryId = categoryId;
-        this.title = title;
-        this.description = description;
-        this.attribute = attribute;
         this.currency = currency;
         this.price = price;
         this.discount = discount;
@@ -73,14 +59,6 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getAttribute() {
-        return attribute;
-    }
-
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
     }
 
     public String getPrice() {

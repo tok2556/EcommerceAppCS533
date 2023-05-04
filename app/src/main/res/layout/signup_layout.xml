@@ -7,6 +7,7 @@
    -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -17,6 +18,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
+        android:background="@drawable/ic_shopping_cart_black_24dp"
         app:cardCornerRadius="50dp">
 
         <ImageView
@@ -26,7 +28,8 @@
             android:layout_marginTop="@dimen/margin_15dp"
             android:scrollbarTrackHorizontal="@drawable/deals1"
             android:scrollbarTrackVertical="@drawable/deals2"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo"
+            tools:srcCompat="@drawable/deals2" />
     </androidx.cardview.widget.CardView>
 
     <com.quintus.labs.grocerystore.customfonts.MyTextViewOleoScriptBold
@@ -35,7 +38,7 @@
         android:gravity="center"
         android:padding="5dp"
         android:text="@string/signUp"
-        android:textColor="@color/blue_500"
+        android:textColor="@color/design_default_color_primary"
         android:textSize="35sp"
         android:textStyle="bold" />
 
@@ -58,14 +61,14 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/text_color"
-            android:textColorHint="@color/yellow"
+            android:textColorHint="@color/design_default_color_primary"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="2px"
-        android:background="@color/yellow" />
+        android:background="@color/design_default_color_primary" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -85,14 +88,14 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/text_color"
-            android:textColorHint="@color/yellow"
+            android:textColorHint="@color/design_default_color_primary"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="2px"
-        android:background="@color/yellow" />
+        android:background="@color/design_default_color_primary" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -114,14 +117,14 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/text_color"
-            android:textColorHint="@color/yellow"
+            android:textColorHint="@color/design_default_color_primary"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="2px"
-        android:background="@color/yellow" />
+        android:background="@color/design_default_color_primary" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -142,14 +145,14 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/text_color"
-            android:textColorHint="@color/yellow"
+            android:textColorHint="@color/design_default_color_primary"
             android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="2px"
-        android:background="@color/yellow" />
+        android:background="@color/design_default_color_primary" />
 
     <CheckBox
         android:id="@+id/terms_conditions"
@@ -165,7 +168,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/gradient_bg"
+        android:background="@color/design_default_color_primary"
         android:padding="3dp"
         android:text="@string/signUp"
         android:textColor="@color/white"
@@ -181,7 +184,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/already_user"
-        android:textColor="@color/yellow"
+        android:textColor="@color/design_default_color_primary"
         android:textSize="15sp" />
 
 </LinearLayout>

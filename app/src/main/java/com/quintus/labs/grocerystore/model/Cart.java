@@ -12,7 +12,6 @@ public class Cart {
     String title;
     String currency;
     String price;
-    String attribute;
     String quantity;
     String subTotal;
 
@@ -21,13 +20,12 @@ public class Cart {
     }
 
 
-    public Cart(String id, String title, String image, String currency, String price, String attribute, String quantity, String subTotal) {
+    public Cart(String id, String title, String image, String currency, String price, String quantity, String subTotal) {
         this.id = id;
         this.image = image;
         this.title = title;
         this.currency = currency;
         this.price = price;
-        this.attribute = attribute;
         this.quantity = quantity;
         this.subTotal = subTotal;
     }
@@ -62,14 +60,6 @@ public class Cart {
 
     public void setPrice(String price) {
         this.price = price;
-    }
-
-    public String getAttribute() {
-        return attribute;
-    }
-
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
     }
 
     public String getQuantity() {

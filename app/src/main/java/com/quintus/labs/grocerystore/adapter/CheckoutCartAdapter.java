@@ -64,6 +64,7 @@ public class CheckoutCartAdapter extends RecyclerView.Adapter<CheckoutCartAdapte
         localStorage = new LocalStorage(context);
         gson = new Gson();
         holder.title.setText(cart.getTitle());
+        holder.attribute.setText(cart.getAttribute());
         _price = cart.getPrice();
         _quantity = cart.getQuantity();
         holder.quantity.setText(_quantity);
@@ -180,7 +181,7 @@ public class CheckoutCartAdapter extends RecyclerView.Adapter<CheckoutCartAdapte
         TextView title;
         ProgressBar progressBar;
         CardView cardView;
-        TextView offer, currency, price, quantity, addToCart, subTotal;
+        TextView offer, currency, price, quantity, attribute, addToCart, subTotal;
         Button plus, minus, delete;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -190,6 +191,7 @@ public class CheckoutCartAdapter extends RecyclerView.Adapter<CheckoutCartAdapte
             title = itemView.findViewById(R.id.product_title);
             progressBar = itemView.findViewById(R.id.progressbar);
             quantity = itemView.findViewById(R.id.quantity);
+            attribute = itemView.findViewById(R.id.product_attribute);
             plus = itemView.findViewById(R.id.quantity_plus);
             minus = itemView.findViewById(R.id.quantity_minus);
             delete = itemView.findViewById(R.id.cart_delete);

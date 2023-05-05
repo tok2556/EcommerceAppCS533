@@ -168,8 +168,40 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colordevider"
+                    android:padding="16dp" />
+
 
                 <!--*********weight**********-->
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal">
+
+                    <com.quintus.labs.grocerystore.customfonts.MyTextView
+                        android:id="@+id/weight1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Weight"
+                        android:textColor="@color/colorSub" />
+
+                    <com.quintus.labs.grocerystore.customfonts.MyTextView
+                        android:id="@+id/apv_attribute"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:text="SMALL"
+                        android:textColor="@color/colorTex" />
+                </LinearLayout>
 
 
                 <View

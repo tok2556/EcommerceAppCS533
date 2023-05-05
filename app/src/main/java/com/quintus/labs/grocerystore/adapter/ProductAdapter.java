@@ -46,7 +46,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     LocalStorage localStorage;
     Gson gson;
     List<Cart> cartList = new ArrayList<>();
-    String _quantity, _price, _attribute, _subtotal;
+    String _quantity, _price, _subtotal;
 
     public ProductAdapter(List<Product> productList, Context context) {
         this.productList = productList;
@@ -84,7 +84,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         cartList = ((BaseActivity) context).getCartList();
         holder.title.setText(product.getTitle());
         holder.offer.setText(product.getDiscount());
-        holder.attribute.setText(product.getAttribute());
         holder.currency.setText(product.getCurrency());
         holder.price.setText(product.getPrice());
         Picasso.get()
@@ -202,13 +201,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
                 _price = product.getPrice();
                 _quantity = holder.quantity.getText().toString();
-                _attribute = product.getAttribute();
-
                 if (Integer.parseInt(_quantity) != 0) {
                     _subtotal = String.valueOf(Double.parseDouble(_price) * Integer.parseInt(_quantity));
                     holder.subTotal.setText(_quantity + "X" + _price + "= Rs." + _subtotal);
                     if (context instanceof ProductActivity) {
-                        Cart cart = new Cart(product.getId(), product.getTitle(), product.getImage(), product.getCurrency(), _price, _attribute, _quantity, _subtotal);
+                        Cart cart = new Cart(product.getId(), product.getTitle(), product.getImage(), product.getCurrency(), _price, _quantity, _subtotal);
                         cartList = ((BaseActivity) context).getCartList();
                         cartList.add(cart);
                         String cartStr = gson.toJson(cartList);
@@ -234,7 +231,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 intent.putExtra("image", product.getImage());
                 intent.putExtra("price", product.getPrice());
                 intent.putExtra("currency", product.getCurrency());
-                intent.putExtra("attribute", product.getAttribute());
                 intent.putExtra("discount", product.getDiscount());
                 intent.putExtra("description", product.getDescription());
 
@@ -262,7 +258,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         TextView title;
         ProgressBar progressBar;
         CardView cardView;
-        TextView offer, currency, price, quantity, attribute, addToCart, subTotal;
+        TextView offer, currency, price, quantity, addToCart, subTotal;
         Button plus, minus;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -277,7 +273,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             price = itemView.findViewById(R.id.product_price);
             quantity = itemView.findViewById(R.id.quantity);
             addToCart = itemView.findViewById(R.id.add_to_cart);
-            attribute = itemView.findViewById(R.id.product_attribute);
             plus = itemView.findViewById(R.id.quantity_plus);
             minus = itemView.findViewById(R.id.quantity_minus);
             subTotal = itemView.findViewById(R.id.sub_total);

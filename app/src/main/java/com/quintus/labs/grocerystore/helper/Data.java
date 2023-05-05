@@ -3,10 +3,7 @@ package com.quintus.labs.grocerystore.helper;
 import com.quintus.labs.grocerystore.model.Category;
 import com.quintus.labs.grocerystore.model.Offer;
 import com.quintus.labs.grocerystore.model.Product;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,6 +118,7 @@ public class Data {
         return offerList;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
@@ -136,4 +134,6 @@ public class Data {
     }
 
 >>>>>>> parent of 8689c6b (idk man)
+=======
+>>>>>>> parent of 3f0e541 (Added some video game items to the app)
 }

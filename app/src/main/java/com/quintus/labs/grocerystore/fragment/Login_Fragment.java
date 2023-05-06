@@ -6,8 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.Parcelable;
 import android.os.Vibrator;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
@@ -26,6 +27,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -33,6 +35,8 @@ import androidx.fragment.app.FragmentManager;
 import com.google.gson.Gson;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.activity.MainActivity;
+import com.quintus.labs.grocerystore.data.GameStoreDatabaseHelper;
+import com.quintus.labs.grocerystore.data.DatabaseDescription;
 import com.quintus.labs.grocerystore.model.User;
 import com.quintus.labs.grocerystore.util.CustomToast;
 import com.quintus.labs.grocerystore.util.Utils;
@@ -185,9 +189,15 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
     // Check Validation before login
     private void checkValidation() {
+
+        GameStoreDatabaseHelper dbHelper = new GameStoreDatabaseHelper(getActivity());
+
         // Get email id and password
         final String getEmailId = emailid.getText().toString();
         final String getPassword = password.getText().toString();
+        String hashedPassword = GameStoreDatabaseHelper.hashPassword(getPassword);
+
+        Cursor cursor = dbHelper.getUserByEmailAndPassword(emailid, hashedPassword);
 
         // Check patter for email id
         Pattern p = Pattern.compile(Utils.regEx);
@@ -203,40 +213,23 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             vibrate(200);
         }
         // Check if email id is valid or not
-        else if (!m.find()) {
-            new CustomToast().Show_Toast(getActivity(), view,
-                    "Your Email Id is Invalid.");
-            vibrate(200);
-            // Else do login and do your stuff
+        else  if (cursor.moveToFirst()) {
+            // login successful
+            int id = cursor.getInt(cursor.getColumnIndex(DatabaseDescription.UserInfo._ID));
+            String name = cursor.getString(cursor.getColumnIndex(DatabaseDescription.UserInfo.COLUMN_NAME));
+            String mobile = cursor.getString(cursor.getColumnIndex(DatabaseDescription.UserInfo.COLUMN_MOBILE));
+            String email = cursor.getString(cursor.getColumnIndex(DatabaseDescription.UserInfo.COLUMN_EMAIL));
+            User user = new User(id, name, email, mobile);
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+
+            // Finish the LoginActivity if you don't want the user to come back to it when pressing back from MainActivity
+            getActivity().finish();
+
         } else {
-
-            progressDialog.setMessage("Please Wait....");
-            progressDialog.show();
-
-            Handler mHand = new Handler();
-            mHand.postDelayed(new Runnable() {
-
-                @Override
-                public void run() {
-                    if (user != null) {
-                        if (!user.getEmail().equalsIgnoreCase(getEmailId) || !user.getPassword().equalsIgnoreCase(getPassword)) {
-                            new CustomToast().Show_Toast(getActivity(), view,
-                                    "Please Check Email or Password");
-                        } else {
-                            startActivity(new Intent(getActivity(), MainActivity.class));
-                            getActivity().finish();
-                            getActivity().overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
-                        }
-                    } else {
-                        new CustomToast().Show_Toast(getActivity(), view,
-                                "Please Register whith This Email");
-                    }
-
-                    progressDialog.dismiss();
-
-                }
-            }, 5000);
-
+            // login failed
+            Toast.makeText(getActivity(), "Invalid email or password", Toast.LENGTH_SHORT).show();
         }
     }
 

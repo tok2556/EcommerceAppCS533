@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.ContentValues;
 
 import androidx.fragment.app.Fragment;
 
@@ -22,6 +23,8 @@ import com.google.gson.Gson;
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.activity.LoginRegisterActivity;
 import com.quintus.labs.grocerystore.activity.MainActivity;
+import com.quintus.labs.grocerystore.data.GameStoreDatabaseHelper;
+import com.quintus.labs.grocerystore.data.DatabaseDescription;
 import com.quintus.labs.grocerystore.model.User;
 import com.quintus.labs.grocerystore.util.CustomToast;
 import com.quintus.labs.grocerystore.util.Utils;
@@ -61,6 +64,7 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         return view;
     }
 
+
     // Initialize all views
     private void initViews() {
         fullName = view.findViewById(R.id.fullName);
@@ -73,6 +77,23 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
         login = view.findViewById(R.id.already_user);
         terms_conditions = view.findViewById(R.id.terms_conditions);
         progressDialog = new ProgressDialog(getContext());
+
+
+//        String name = fullName.getText().toString();
+//        String email = emailId.getText().toString();
+//        String phone = mobileNumber.getText().toString();
+//        String pass = password.getText().toString();
+//
+//        ContentValues values = new ContentValues();
+//        values.put(DatabaseDescription.UserInfo.COLUMN_NAME, name);
+//        values.put(DatabaseDescription.UserInfo.COLUMN_EMAIL, email);
+//        values.put(DatabaseDescription.UserInfo.COLUMN_MOBILE, phone);
+//        values.put(DatabaseDescription.UserInfo.COLUMN_PASSWORD, pass);
+//
+//        ((LoginRegisterActivity) getActivity()).addUser(values);
+
+// Call the addUser method with the values
+
 
         // Setting text selector over textviews
         @SuppressLint("ResourceType") XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
@@ -90,12 +111,28 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
     private void setListeners() {
         signUpButton.setOnClickListener(this);
         login.setOnClickListener(this);
+
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.signUpBtn:
+
+                String name = fullName.getText().toString();
+                String email = emailId.getText().toString();
+                String phone = mobileNumber.getText().toString();
+                String pass = password.getText().toString();
+                String hashedPassword = GameStoreDatabaseHelper.hashPassword(pass);
+
+                ContentValues values = new ContentValues();
+                values.put(DatabaseDescription.UserInfo.COLUMN_NAME, name);
+                values.put(DatabaseDescription.UserInfo.COLUMN_EMAIL, email);
+                values.put(DatabaseDescription.UserInfo.COLUMN_MOBILE, phone);
+                values.put(DatabaseDescription.UserInfo.COLUMN_PASSWORD, hashedPassword);
+
+                ((LoginRegisterActivity) getActivity()).addUser(values);
 
                 // Call checkValidation method
                 checkValidation();
@@ -123,22 +160,22 @@ public class SignUp_Fragment extends Fragment implements OnClickListener {
 
 
         if (getFullName.length() == 0) {
-            fullName.setError("Eneter Your Name");
+            fullName.setError("Enter Your Name");
             fullName.requestFocus();
         } else if (getEmailId.length() == 0) {
-            emailId.setError("Eneter Your Email");
+            emailId.setError("Enter Your Email");
             emailId.requestFocus();
         } else if (!m.find()) {
-            emailId.setError("Eneter Correct Email");
+            emailId.setError("Enter Correct Email");
             emailId.requestFocus();
         } else if (getMobileNumber.length() == 0) {
-            mobileNumber.setError("Eneter Your Mobile Number");
+            mobileNumber.setError("Enter Your Mobile Number");
             mobileNumber.requestFocus();
         } else if (getPassword.length() == 0) {
-            password.setError("Eneter Password");
+            password.setError("Enter Password");
             password.requestFocus();
         } else if (getPassword.length() < 6) {
-            password.setError("Eneter 6 digit Password");
+            password.setError("Enter 6 digit Password");
             password.requestFocus();
         } else if (!terms_conditions.isChecked()) {
             new CustomToast().Show_Toast(getActivity(), view,

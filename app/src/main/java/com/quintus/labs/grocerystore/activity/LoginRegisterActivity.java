@@ -1,6 +1,8 @@
 package com.quintus.labs.grocerystore.activity;
 
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.quintus.labs.grocerystore.R;
+import com.quintus.labs.grocerystore.data.GameStoreDatabaseHelper;
+import com.quintus.labs.grocerystore.data.DatabaseDescription;
 import com.quintus.labs.grocerystore.fragment.Login_Fragment;
 import com.quintus.labs.grocerystore.util.Utils;
 
@@ -21,9 +25,16 @@ import com.quintus.labs.grocerystore.util.Utils;
  */
 public class LoginRegisterActivity extends AppCompatActivity {
     private static FragmentManager fragmentManager;
+    private GameStoreDatabaseHelper userinfo;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        userinfo = new GameStoreDatabaseHelper(this);
+        db = userinfo.getWritableDatabase();
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
         getSupportActionBar().hide();
@@ -49,6 +60,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 });
 
     }
+
+
 
     // Replace Login Fragment with animation
     public void replaceLoginFragment() {
@@ -78,5 +91,19 @@ public class LoginRegisterActivity extends AppCompatActivity {
             replaceLoginFragment();
         else
             super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // close the database connection
+        db.close();
+    }
+
+    public void addUser(ContentValues values) {
+
+        db.insert(DatabaseDescription.UserInfo.TABLE_NAME, null, values);
+
     }
 }

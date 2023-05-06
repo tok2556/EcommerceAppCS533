@@ -100,14 +100,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
                         if (cartList.get(i).getId().equalsIgnoreCase(cart.getId())) {
 
-                            // Log.d("totalItem", total_item + "");
-
                             _subtotal = String.valueOf(Double.parseDouble(holder.price.getText().toString()) * total_item);
                             cartList.get(i).setQuantity(holder.quantity.getText().toString());
                             cartList.get(i).setSubTotal(_subtotal);
                             holder.subTotal.setText(_subtotal);
                             String cartStr = gson.toJson(cartList);
-                            //Log.d("CART", cartStr);
                             localStorage.setCart(cartStr);
                             ((CartActivity) context).updateTotalPrice();
                         }
@@ -129,14 +126,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     for (int i = 0; i < cartList.size(); i++) {
                         if (cartList.get(i).getId().equalsIgnoreCase(cart.getId())) {
 
-                            //holder.quantity.setText(total_item + "");
-                            //Log.d("totalItem", total_item + "");
                             _subtotal = String.valueOf(Double.parseDouble(holder.price.getText().toString()) * total_item);
                             cartList.get(i).setQuantity(holder.quantity.getText().toString());
                             cartList.get(i).setSubTotal(_subtotal);
                             holder.subTotal.setText(_subtotal);
                             String cartStr = gson.toJson(cartList);
-                            //Log.d("CART", cartStr);
                             localStorage.setCart(cartStr);
                             ((CartActivity) context).updateTotalPrice();
 

@@ -126,7 +126,6 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
                     cartList.add(cart);
 
                     String cartStr = gson.toJson(cartList);
-                    //Log.d("CART", cartStr);
                     localStorage.setCart(cartStr);
                     ((AddorRemoveCallbacks) context).onAddProduct();
                     notifyItemChanged(position);
@@ -149,7 +148,6 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
                         cartList.get(i).setQuantity(holder.quantity.getText().toString());
                         cartList.get(i).setSubTotal(_subtotal);
                         String cartStr = gson.toJson(cartList);
-                        //Log.d("CART", cartStr);
                         localStorage.setCart(cartStr);
                     }
                 }
@@ -176,7 +174,6 @@ public class NewProductAdapter extends RecyclerView.Adapter<NewProductAdapter.My
                             cartList.get(i).setQuantity(holder.quantity.getText().toString());
                             cartList.get(i).setSubTotal(_subtotal);
                             String cartStr = gson.toJson(cartList);
-                            //Log.d("CART", cartStr);
                             localStorage.setCart(cartStr);
 
                         }

@@ -1,6 +1,7 @@
 package com.quintus.labs.grocerystore.activity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.adapter.ViewPagerAdapter;
+import com.quintus.labs.grocerystore.data.GameStoreDatabaseHelper;
 import com.quintus.labs.grocerystore.util.localstorage.LocalStorage;
 
 import java.util.Timer;
@@ -28,6 +30,9 @@ import java.util.TimerTask;
  */
 public class WelcomeActivity extends AppCompatActivity {
 
+    private GameStoreDatabaseHelper userinfo;
+    private SQLiteDatabase db;
+
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
     Timer timer;
@@ -39,6 +44,10 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        userinfo = new GameStoreDatabaseHelper(this);
+        db = userinfo.getWritableDatabase();
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -142,5 +151,13 @@ public class WelcomeActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), LoginRegisterActivity.class));
         finish();
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // close the database connection
+        db.close();
     }
 }

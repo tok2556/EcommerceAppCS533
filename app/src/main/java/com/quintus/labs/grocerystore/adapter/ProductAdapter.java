@@ -115,7 +115,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                     _quantity = cartList.get(i).getQuantity();
                     _price = product.getPrice();
                     _subtotal = String.valueOf(Double.parseDouble(_price) * Integer.parseInt(_quantity));
-                    holder.subTotal.setText(_quantity + "X" + _price + "= Rs." + _subtotal);
+                    holder.subTotal.setText(_quantity + "X" + _price + "= $" + _subtotal);
                     Log.d("Tag : ", cartList.get(i).getId() + "-->" + product.getId());
                 }
             }
@@ -136,14 +136,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
                         if (cartList.get(i).getId().equalsIgnoreCase(product.getId())) {
 
-                            // Log.d("totalItem", total_item + "");
-
                             _subtotal = String.valueOf(Double.parseDouble(holder.price.getText().toString()) * total_item);
                             cartList.get(i).setQuantity(holder.quantity.getText().toString());
                             cartList.get(i).setSubTotal(_subtotal);
-                            holder.subTotal.setText(total_item + "X" + holder.price.getText().toString() + "= Rs." + _subtotal);
+                            holder.subTotal.setText(total_item + "X" + holder.price.getText().toString() + "= $" + _subtotal);
                             String cartStr = gson.toJson(cartList);
-                            //Log.d("CART", cartStr);
                             localStorage.setCart(cartStr);
                             notifyItemChanged(position);
                         }
@@ -163,14 +160,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                     for (int i = 0; i < cartList.size(); i++) {
                         if (cartList.get(i).getId().equalsIgnoreCase(product.getId())) {
 
-                            //holder.quantity.setText(total_item + "");
-                            //Log.d("totalItem", total_item + "");
                             _subtotal = String.valueOf(Double.parseDouble(holder.price.getText().toString()) * total_item);
                             cartList.get(i).setQuantity(holder.quantity.getText().toString());
                             cartList.get(i).setSubTotal(_subtotal);
-                            holder.subTotal.setText(total_item + "X" + holder.price.getText().toString() + "= Rs." + _subtotal);
+                            holder.subTotal.setText(total_item + "X" + holder.price.getText().toString() + "= $" + _subtotal);
                             String cartStr = gson.toJson(cartList);
-                            //Log.d("CART", cartStr);
                             localStorage.setCart(cartStr);
                             notifyItemChanged(position);
                         }
@@ -185,9 +179,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(context, ProductActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                context.startActivity(intent);*/
                 Toast.makeText(context, "Product Clicked", Toast.LENGTH_LONG).show();
             }
         });
@@ -206,13 +197,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
                 if (Integer.parseInt(_quantity) != 0) {
                     _subtotal = String.valueOf(Double.parseDouble(_price) * Integer.parseInt(_quantity));
-                    holder.subTotal.setText(_quantity + "X" + _price + "= Rs." + _subtotal);
+                    holder.subTotal.setText(_quantity + "X" + _price + "= $" + _subtotal);
                     if (context instanceof ProductActivity) {
                         Cart cart = new Cart(product.getId(), product.getTitle(), product.getImage(), product.getCurrency(), _price, _attribute, _quantity, _subtotal);
                         cartList = ((BaseActivity) context).getCartList();
                         cartList.add(cart);
                         String cartStr = gson.toJson(cartList);
-                        //Log.d("CART", cartStr);
                         localStorage.setCart(cartStr);
                         ((AddorRemoveCallbacks) context).onAddProduct();
                         notifyItemChanged(position);

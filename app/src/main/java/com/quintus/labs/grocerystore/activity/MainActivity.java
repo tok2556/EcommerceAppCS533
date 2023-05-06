@@ -28,9 +28,6 @@ import com.quintus.labs.grocerystore.R;
 import com.quintus.labs.grocerystore.fragment.CategoryFragment;
 import com.quintus.labs.grocerystore.fragment.HomeFragment;
 import com.quintus.labs.grocerystore.fragment.MyOrderFragment;
-import com.quintus.labs.grocerystore.fragment.NewProductFragment;
-import com.quintus.labs.grocerystore.fragment.OffrersFragment;
-import com.quintus.labs.grocerystore.fragment.PopularProductFragment;
 import com.quintus.labs.grocerystore.fragment.ProfileFragment;
 import com.quintus.labs.grocerystore.helper.Converter;
 import com.quintus.labs.grocerystore.model.User;
@@ -49,6 +46,8 @@ public class MainActivity extends BaseActivity
     private static int cart_count = 0;
     User user;
 
+    public static final String USERINFO_URI = "userinfo_uri";
+
     @SuppressLint("ResourceAsColor")
     static void centerToolbarTitle(@NonNull final Toolbar toolbar) {
         final CharSequence title = toolbar.getTitle();
@@ -57,13 +56,14 @@ public class MainActivity extends BaseActivity
         if (!outViews.isEmpty()) {
             final TextView titleView = (TextView) outViews.get(0);
             titleView.setGravity(Gravity.CENTER);
-            titleView.setTextColor(Color.parseColor("#FAD23C"));
+            titleView.setTextColor(Color.parseColor("#f0efeb"));
             final Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams) titleView.getLayoutParams();
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
             toolbar.requestLayout();
-            //also you can use titleView for changing font: titleView.setTypeface(Typeface);
         }
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -75,20 +75,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-
-
-    /*public void toggleCommunicationGroup(View button) {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        MenuItem group = navigationView.getMenu().findItem(R.id.nav_communication_group);
-        boolean isVisible = group.isVisible();
-        group.setVisible(!isVisible);
-        Button toggleButton = (Button)findViewById(R.id.main_toggle_button);
-        if (isVisible) {
-            toggleButton.setText("Enable communication group");
-        } else {
-            toggleButton.setText("Disable communication group");
-        }
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,11 +98,15 @@ public class MainActivity extends BaseActivity
 
     }
 
-
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -162,7 +152,6 @@ public class MainActivity extends BaseActivity
                 startActivity(new Intent(getApplicationContext(), LoginRegisterActivity.class));
                 finish();
                 overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-                // Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -182,15 +171,8 @@ public class MainActivity extends BaseActivity
             case R.id.nav_profile:
                 fragment = new ProfileFragment();
                 break;
-            case R.id.nav_popular_products:
-                fragment = new PopularProductFragment();
-                break;
-            case R.id.nav_new_product:
-                fragment = new NewProductFragment();
-                break;
-
-            case R.id.nav_search:
-                //fragment = new CategoryFragment();
+            case R.id.nav_category:
+                fragment = new CategoryFragment();
                 break;
             case R.id.nav_my_order:
                 fragment = new MyOrderFragment();
@@ -237,6 +219,7 @@ public class MainActivity extends BaseActivity
     public void onRemoveProduct() {
         super.onRemoveProduct();
     }
+
 
 
 }

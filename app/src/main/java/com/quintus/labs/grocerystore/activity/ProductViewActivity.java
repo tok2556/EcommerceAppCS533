@@ -69,7 +69,6 @@ public class ProductViewActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp);
-        //upArrow.setColorFilter(Color.parseColor("#FFFFFF"), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setHomeAsUpIndicator(upArrow);
 
         cart_count = cartCount();
@@ -150,7 +149,6 @@ public class ProductViewActivity extends BaseActivity {
                 cart = new Cart(_id, _title, _image, _currency, _price, _attribute, "1", _price);
                 cartList.add(cart);
                 String cartStr = gson.toJson(cartList);
-                //Log.d("CART", cartStr);
                 localStorage.setCart(cartStr);
                 onAddProduct();
                 addToCart.setVisibility(View.GONE);
@@ -165,7 +163,6 @@ public class ProductViewActivity extends BaseActivity {
                 _price = price.getText().toString();
 
 
-                // int total_item = Integer.parseInt(cartList.get(cartId).getQuantity());
                 int total_item = Integer.parseInt(quantity.getText().toString());
                 total_item++;
                 Log.d("totalItem", total_item + "");
@@ -176,7 +173,6 @@ public class ProductViewActivity extends BaseActivity {
                 cartList.get(cartId).setAttribute(attribute.getText().toString());
                 cartList.get(cartId).setPrice(_price);
                 String cartStr = gson.toJson(cartList);
-                //Log.d("CART", cartStr);
                 localStorage.setCart(cartStr);
             }
         });
@@ -186,7 +182,6 @@ public class ProductViewActivity extends BaseActivity {
             public void onClick(View view) {
                 _price = price.getText().toString();
 
-                //int total_item = Integer.parseInt(quantity.getText().toString());
                 int total_item = Integer.parseInt(quantity.getText().toString());
                 if (total_item != 1) {
                     total_item--;
@@ -200,7 +195,6 @@ public class ProductViewActivity extends BaseActivity {
                     cartList.get(cartId).setAttribute(attribute.getText().toString());
                     cartList.get(cartId).setPrice(_price);
                     String cartStr = gson.toJson(cartList);
-                    //Log.d("CART", cartStr);
                     localStorage.setCart(cartStr);
                 }
             }

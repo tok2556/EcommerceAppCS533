@@ -13,7 +13,7 @@ public class User {
     String mobile;
     String password;
 
-    public User() {
+    public User(int id, String name, String email, String mobile) {
     }
 
     public User(String id, String name, String email, String mobile, String password) {

@@ -16,13 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/fifa23" />
+            android:layout_height="match_parent">
+
+        </androidx.viewpager.widget.ViewPager>
     </RelativeLayout>
 
     <RelativeLayout
@@ -31,13 +30,6 @@
         android:background="#CCFFFFFF">
 
     </RelativeLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-    </androidx.viewpager.widget.ViewPager>
 
     <LinearLayout
         android:layout_width="match_parent"
